@@ -3,7 +3,7 @@ const d = document,
     $template = d.getElementById("taco-template").content,
     $fragment = d.createDocumentFragment(),
     fetchOption = { headers:{
-        Authorization:"Bearer YOUR-TOKEN-PUBLIC"
+        Authorization:"Bearer YOUR-TOKEN-SECRET"
     }
 };
 
@@ -53,7 +53,7 @@ d.addEventListener("click", (e)=>{
         if(type === "one_time"){
             let cantidad = prompt("¿Cuánto del mismo producto quieres? Ej: 1, 2, 5....");
             
-            Stripe("YOUR-TOKEN-SECRET")
+            Stripe("YOUR-TOKEN-PUBLIC")
             .redirectToCheckout({
                 lineItems: [{price:priceId, quantity:parseInt(`${cantidad}`)}],
                 mode:"payment",
@@ -63,7 +63,7 @@ d.addEventListener("click", (e)=>{
         }
 
         if(type === "recurring"){
-            Stripe("YOUR-TOKEN-SECRET")
+            Stripe("YOUR-TOKEN-PUBLIC")
             .redirectToCheckout({
                 lineItems: [{price:priceId, quantity:1}],
                 mode:"subscription",
